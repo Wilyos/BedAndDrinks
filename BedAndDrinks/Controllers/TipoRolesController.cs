@@ -110,6 +110,11 @@ namespace BedAndDrinks.Controllers
             {
                 return NotFound();
             }
+            var permisos = _context.Permisos.ToList(); // Para evitar el error
+            Console.WriteLine($"[GET] Permisos cargados: {permisos.Count}");
+
+
+            ViewBag.Permisos = permisos;
             return View(tipoRol);
         }
 
