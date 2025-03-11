@@ -84,9 +84,11 @@ namespace BedAndDrinks.Controllers
                     _context.PermisosTipoRols.Add(new PermisosTipoRol
                     {
                         IdTipoRolPtr = tipoRol.IdTipoRol,
-                        IdPermisoPtr = idPermiso
+                        IdPermisoPtr = Permiso.ReferenceEquals(_context.Permisos.Find(idPermiso), null) ? 0 : idPermiso
                     });
                 }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             else
             {
