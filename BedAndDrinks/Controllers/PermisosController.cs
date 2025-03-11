@@ -57,9 +57,19 @@ namespace BedAndDrinks.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(permiso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (permiso.NombrePermiso == null || permiso.Descripcion == null)
+                {
+                    ModelState.AddModelError("NombrePermiso", "El nombre del permiso es requerido");
+                    ModelState.AddModelError("Descripcion", "El nombre del permiso es requerido");
+                    return View(permiso);
+                }
+                else
+                {
+                    _context.Add(permiso);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                   
             }
             return View(permiso);
         }
