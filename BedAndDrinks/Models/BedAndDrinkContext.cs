@@ -288,11 +288,10 @@ public partial class BedAndDrinkContext : DbContext
             entity.Property(e => e.IdRol).HasColumnName("idRol");
             entity.Property(e => e.IdTipoRolR).HasColumnName("idTipoRolR");
             entity.Property(e => e.NombreRol).HasMaxLength(255);
-            entity.Property(e => e.FechaCreacion).HasColumnName("fechaCreacion");
-
             entity.HasOne(d => d.IdTipoRolRNavigation).WithMany(p => p.Rols)
                 .HasForeignKey(d => d.IdTipoRolR)
                 .HasConstraintName("FK__Rol__idTipoRolR__46E78A0C");
+            entity.Property(e => e.FechaCreacion).HasColumnName("fechaCreacion");
         });
 
         modelBuilder.Entity<Servicio>(entity =>
