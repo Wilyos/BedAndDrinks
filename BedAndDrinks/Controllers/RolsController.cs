@@ -56,13 +56,22 @@ namespace BedAndDrinks.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdRol,NombreRol,IdTipoRolR,FechaCreacion")] Rol rol)
+        public async Task<IActionResult> Create([Bind("IdRol,NombreRol,IdTipoRolR,FechaCreacion,Estado")] Rol rol)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(rol);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (await _context.Rols.AnyAsync(r => r.NombreRol == rol.NombreRol))
+                {
+                    ModelState.AddModelError("NombreRol", "El nombre del rol ya existe. Por favor, elija otro.");
+                }
+                else
+                {
+                    _context.Add(rol);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                  
             }
             ViewData["IdTipoRolR"] = new SelectList(_context.TipoRols, "IdTipoRol", "IdTipoRol", rol.IdTipoRolR);
             return View(rol);

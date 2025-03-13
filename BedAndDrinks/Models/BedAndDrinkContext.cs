@@ -292,6 +292,7 @@ public partial class BedAndDrinkContext : DbContext
                 .HasForeignKey(d => d.IdTipoRolR)
                 .HasConstraintName("FK__Rol__idTipoRolR__46E78A0C");
             entity.Property(e => e.FechaCreacion).HasColumnName("fechaCreacion");
+            entity.Property(e => e.Estado).HasColumnName("estado");
         });
 
         modelBuilder.Entity<Servicio>(entity =>

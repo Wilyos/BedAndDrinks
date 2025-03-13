@@ -13,6 +13,8 @@ public partial class Rol
 
     public DateOnly FechaCreacion { get; set; }
 
+    public Boolean Estado { get; set; } = true;
+
     public virtual TipoRol? IdTipoRolRNavigation { get; set; }
 
     public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();

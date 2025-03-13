@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdTipoRolRNavigation)
             </th>
+            <th>
+				@Html.DisplayNameFor(model => model.Estado)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdTipoRolRNavigation.IdTipoRol)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdRol">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdRol">Details</a> |
