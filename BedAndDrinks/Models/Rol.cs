@@ -11,6 +11,8 @@ public partial class Rol
 
     public int? IdTipoRolR { get; set; }
 
+    public DateOnly FechaCreacion { get; set; }
+
     public virtual TipoRol? IdTipoRolRNavigation { get; set; }
 
     public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
