@@ -166,7 +166,7 @@ namespace BedAndDrinks.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError("", "Ocurrió un error al actualizar los datos.");
             }

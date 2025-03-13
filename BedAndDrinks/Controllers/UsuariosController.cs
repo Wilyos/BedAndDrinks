@@ -62,7 +62,7 @@ namespace BedAndDrinks.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(Nom)
+                
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
