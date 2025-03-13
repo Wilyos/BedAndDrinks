@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
     var permisos = ViewBag.Permisos as List<BedAndDrinks.Models.Permiso> ?? new List<BedAndDrinks.Models.Permiso>();
 }
-
+ 
 
 <h1>Create</h1>
 <h4>TipoRol</h4>
@@ -47,4 +47,6 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
 

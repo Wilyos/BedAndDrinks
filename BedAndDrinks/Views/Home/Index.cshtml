@@ -2,123 +2,132 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
+<header>
+    <p>Bienvenido a Bed&Drinks</p>
+</header>
 
+
+<main>
+    <form asp-action="Buscar" method="post">
+        <label for="Destino">¿Adónde vas?</label>
+        <input type="text" id="Destino" name="Destino" required />
+
+        <label for="CheckIn">Check-in</label>
+        <input type="date" id="CheckIn" name="CheckIn" required />
+
+        <label for="CheckOut">Check-out</label>
+        <input type="date" id="CheckOut" name="CheckOut" required />
+
+        <label for="Adultos">Adultos</label>
+        <input type="number" id="Adultos" name="Adultos" value="2" required />
+
+        <label for="Ninos">Niños</label>
+        <input type="number" id="Ninos" name="Ninos" value="0" required />
+
+        <label for="Habitaciones">Habitaciones</label>
+        <input type="number" id="Habitaciones" name="Habitaciones" value="1" required />
+
+        <button type="submit">Buscar</button>
+    </form>
+</main>
+
+<style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
         margin: 0;
         padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
     }
 
     header {
-        background-color: #4CAF50;
+        background-color: #007bff;
         color: white;
-        padding: 10px 20px;
+        width: 100%;
+        padding: 10px 0;
         text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
     }
 
-    header h1 {
-        margin:0;
-    }
-
-    nav {
-        margin-top: 10px;
-    }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
+        header p {
+            margin: 20px;
+            font-size: 1.2em;
         }
 
-            nav a:hover {
-                text-decoration: underline;
-            }
+    h1 {
+        text-align: center;
+        color: #333;
+        margin: 20px 0;
+        font-size: 2.5em;
+    }
 
     main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         padding: 20px;
-        max-width: 800px;
-        margin: 0 auto;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
     }
 
-        form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
 
-        form input[type="text"],
-        form input[type="date"],
-        form input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        form button {
-            grid-column: span 2;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-            form button:hover {
-                background-color: #45a049;
-            }
-
-    footer {
-        text-align: center;
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+        width: 100%;
         padding: 10px;
-        background-color: #333;
-        color: white;
-        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
     }
 
-        footer a {
-            color: #4CAF50;
-            text-decoration: none;
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus {
+            border-color: #666;
+            outline: none;
         }
 
-            footer a:hover {
-                text-decoration: underline;
-            }
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+        transition: background-color 0.3s;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004080;
+        }
 </style>
-
-<h1>Bed&Drinks</h1>
-<form asp-action="Buscar" method="post">
-    <label for="Destino">¿Adónde vas?</label>
-    <input type="text" id="Destino" name="Destino" required />
-
-    <label for="CheckIn">Check-in</label>
-    <input type="date" id="CheckIn" name="CheckIn" required />
-
-    <label for="CheckOut">Check-out</label>
-    <input type="date" id="CheckOut" name="CheckOut" required />
-
-    <label for="Adultos">Adultos</label>
-    <input type="number" id="Adultos" name="Adultos" value="2" required />
-
-    <label for="Ninos">Niños</label>
-    <input type="number" id="Ninos" name="Ninos" value="0" required />
-
-    <label for="Habitaciones">Habitaciones</label>
-    <input type="number" id="Habitaciones" name="Habitaciones" value="1" required />
-
-    <button type="submit">Buscar</button>
-</form>
