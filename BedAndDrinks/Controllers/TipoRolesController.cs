@@ -27,17 +27,14 @@ namespace BedAndDrinks.Controllers
         // GET: TipoRoles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var tipoRol = await _context.TipoRols
-                .FirstOrDefaultAsync(m => m.IdTipoRol == id);
-            if (tipoRol == null)
-            {
-                return NotFound();
-            }
+                .Include(tr => tr.PermisosTipoRols) // Incluir relación intermedia
+                .ThenInclude(ptr => ptr.IdPermisoPtrNavigation)   // Incluir los detalles del permiso
+                .FirstOrDefaultAsync(tr => tr.IdTipoRol == id);
+
+            if (tipoRol == null) return NotFound();
 
             return View(tipoRol);
         }
@@ -100,21 +97,29 @@ namespace BedAndDrinks.Controllers
         // GET: TipoRoles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null) return NotFound();
+
+
+            var tipoRol = await _context.TipoRols
+                .Include(tr => tr.PermisosTipoRols)
+                .ThenInclude(ptr => ptr.IdPermisoPtrNavigation) // Cargar el nombre del permiso
+                .FirstOrDefaultAsync(m => m.IdTipoRol == id);
+
+            if (tipoRol == null)return NotFound();
+
+            // Obtener todos los permisos disponibles
+            var permisosDisponibles = await _context.Permisos.ToListAsync();
+
+
+            // Crear una lista de permisos con los seleccionados marcados
+            ViewBag.Permisos = permisosDisponibles.Select(p => new SelectListItem
             {
-                return NotFound();
-            }
-
-            var tipoRol = await _context.TipoRols.FindAsync(id);
-            if (tipoRol == null)
-            {
-                return NotFound();
-            }
-            var permisos = _context.Permisos.ToList(); // Para evitar el error
-            Console.WriteLine($"[GET] Permisos cargados: {permisos.Count}");
+                Value = p.IdPermiso.ToString(),
+                Text = p.NombrePermiso,
+                Selected = tipoRol.PermisosTipoRols.Any(ptr => ptr.IdPermisoPtr == p.IdPermiso)
+            }).ToList();
 
 
-            ViewBag.Permisos = permisos;
             return View(tipoRol);
         }
 
@@ -123,33 +128,49 @@ namespace BedAndDrinks.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoRol,NombreTipoRol")] TipoRol tipoRol)
+        public async Task<IActionResult> Edit(int id, TipoRol tipoRol, List<int> permisosSeleccionados)
         {
             if (id != tipoRol.IdTipoRol)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                // Obtener el tipo de rol actual con sus permisos
+                var tipoRolExistente = await _context.TipoRols
+                    .Include(tr => tr.PermisosTipoRols)
+                    .FirstOrDefaultAsync(tr => tr.IdTipoRol == id);
+
+                if (tipoRolExistente == null)
                 {
-                    _context.Update(tipoRol);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                // Actualizar el nombre del rol
+                tipoRolExistente.NombreTipoRol = tipoRol.NombreTipoRol;
+
+                // Eliminar permisos antiguos
+                _context.PermisosTipoRols.RemoveRange(tipoRolExistente.PermisosTipoRols);
+
+                // Agregar nuevos permisos
+                foreach (var permisoId in permisosSeleccionados)
                 {
-                    if (!TipoRolExists(tipoRol.IdTipoRol))
+                    tipoRolExistente.PermisosTipoRols.Add(new PermisosTipoRol
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        IdTipoRolPtr = tipoRolExistente.IdTipoRol,
+                        IdPermisoPtr = permisoId
+                    });
                 }
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al actualizar los datos.");
+            }
+
             return View(tipoRol);
         }
 
