@@ -1,0 +1,66 @@
+﻿@model BedAndDrinks.Models.Usuario
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdUsuario" class="control-label"></label>
+                <input asp-for="IdUsuario" class="form-control" />
+                <span asp-validation-for="IdUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreUsuario" class="control-label"></label>
+                <input asp-for="NombreUsuario" class="form-control" />
+                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoUsuario" class="control-label"></label>
+                <input asp-for="CorreoUsuario" class="form-control" />
+                <span asp-validation-for="CorreoUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoUsuario" class="control-label"></label>
+                <input asp-for="EstadoUsuario" class="form-control" />
+                <span asp-validation-for="EstadoUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observacion" class="control-label"></label>
+                <input asp-for="Observacion" class="form-control" />
+                <span asp-validation-for="Observacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrasena" class="control-label"></label>
+                <input asp-for="Contrasena" class="form-control" />
+                <span asp-validation-for="Contrasena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdRolUsuario" class="control-label"></label>
+                <select asp-for="IdRolUsuario" class ="form-control" asp-items="ViewBag.IdRolUsuario"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdReservaU" class="control-label"></label>
+                <select asp-for="IdReservaU" class ="form-control" asp-items="ViewBag.IdReservaU"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
