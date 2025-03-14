@@ -2,7 +2,34 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<style>
+
+</style>
+<h1>Bed&Drinks</h1>
+<form asp-action="Buscar" method="post">
+    <label for="Destino">¿Adónde vas?</label>
+    <input type="text" id="Destino" name="Destino" required />
+
+    <label for="CheckIn">Check-in</label>
+    <input type="date" id="CheckIn" name="CheckIn" required />
+
+    <label for="CheckOut">Check-out</label>
+    <input type="date" id="CheckOut" name="CheckOut" required />
+
+    <label for="Adultos">Adultos</label>
+    <input type="number" id="Adultos" name="Adultos" value="2" required />
+
+    <label for="Ninos">Niños</label>
+    <input type="number" id="Ninos" name="Ninos" value="0" required />
+
+    <label for="Habitaciones">Habitaciones</label>
+    <input type="number" id="Habitaciones" name="Habitaciones" value="1" required />
+
+    <button type="submit">Buscar</button>
+</form>
+
+<p>Viajo por trabajo</p>
+
+<p>Reserva y ahorra un 7% en Rentalcars.com en forma de vales <a href="#">Ver detalles de la promoción</a></p>
+
+<h2>Ofertas</h2>
