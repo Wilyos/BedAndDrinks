@@ -1,6 +1,8 @@
 using BedAndDrinks.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BedAndDrinkContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
+
+builder.Services.AddControllersWithViews(); // Agregar servicios MVC al contenedor de servicios
+builder.Services.AddFluentValidationAutoValidation(); // Agregar validación automática de FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>(); // Registra automáticamente todos los validadores en el ensamblado que contiene UsuarioValidator
 
 var app = builder.Build();
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BedAndDrinks.Models;
+using FluentValidation;
 
 namespace BedAndDrinks.Controllers
 {
@@ -62,15 +63,14 @@ namespace BedAndDrinks.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdReservaU"] = new SelectList(_context.Reservas, "IdReserva", "IdReserva", usuario.IdReservaU);
-            ViewData["IdRolUsuario"] = new SelectList(_context.Rols, "IdRol", "IdRol", usuario.IdRolUsuario);
-            return View(usuario);
-        }
+            ViewData["IdReservaU"] = new SelectList(_context.Reservas, "IdReserva", "IdReserva", usuario.IdReservaU); // Crea una lista desplegable de reservas
+            ViewData["IdRolUsuario"] = new SelectList(_context.Rols, "IdRol", "IdRol", usuario.IdRolUsuario); // Crea una lista desplegable de roles
+            return View(usuario); // Devuelve la vista
+        } 
 
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -102,12 +102,21 @@ namespace BedAndDrinks.Controllers
                 return NotFound();
             }
 
+            var existeUsuario = await _context.Usuarios
+                .Where(u => (u.CorreoUsuario == usuario.CorreoUsuario || u.NombreUsuario == usuario.NombreUsuario || u.Contrasena == usuario.Contrasena) && u.IdUsuario != id) // Verifica si el correo o el nombre de usuario ya existe
+                .AnyAsync();
+            if (existeUsuario)
+            {
+                ModelState.AddModelError("", "El nombre de usuario, contraseña o correo ya existe");
+                return View(usuario);
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
+                    _context.Update(usuario); 
+                    await _context.SaveChangesAsync(); 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
