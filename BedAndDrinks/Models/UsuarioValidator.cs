@@ -41,9 +41,9 @@ namespace BedAndDrinks.Models
                 .NotEmpty().WithMessage("El rol es requerido")
                 .Must(x => _context.Rols.Any(y => y.IdRol == x)).WithMessage("El rol no existe");
 
-            RuleFor(x => x.IdReservaU)
+           /* RuleFor(x => x.IdReservaU)
                 .NotEmpty().WithMessage("La reserva es requerida")
-                .Must(x => _context.Reservas.Any(y => y.IdReserva == x)).WithMessage("La reserva no existe");
+                .Must(x => _context.Reservas.Any(y => y.IdReserva == x)).WithMessage("La reserva no existe"); */
 
             RuleFor(x => x.EstadoUsuario)
                 .NotEmpty().WithMessage("El estado usuario es requerido")

@@ -99,7 +99,7 @@ namespace BedAndDrinks.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdRol,NombreRol,IdTipoRolR,FechaCreacion")] Rol rol)
+        public async Task<IActionResult> Edit(int id, [Bind("IdRol,NombreRol,IdTipoRolR,FechaCreacion,Estado")] Rol rol)
         {
             if (id != rol.IdRol)
             {
