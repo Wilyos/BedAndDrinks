@@ -53,8 +53,7 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-    }
-
+  
         header p {
             margin: 20px;
             font-size: 1.2em;
@@ -66,6 +65,14 @@
         margin: 20px 0;
         font-size: 2.5em;
     }
+
+</style>
+<h1>Bed&Drinks</h1>
+<form asp-action="Buscar" method="post">
+    
+    <label for="CheckIn">Check-in</label>
+    <input type="date" id="CheckIn" name="CheckIn" required />
+
 
     main {
         flex: 1;

@@ -11,7 +11,7 @@ public partial class Usuario
 
     public string? CorreoUsuario { get; set; }
 
-    public string? EstadoUsuario { get; set; }
+    public string? EstadoUsuario { get; set; } = "Activo";
 
     public string? Observacion { get; set; }
 

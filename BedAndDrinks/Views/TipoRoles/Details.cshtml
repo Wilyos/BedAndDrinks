@@ -1,24 +1,37 @@
 ﻿@model BedAndDrinks.Models.TipoRol
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
+<h2>Detalles del Tipo de Rol</h2>
 
 <div>
-    <h4>TipoRol</h4>
+    <h4>Tipo de Rol</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreTipoRol)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreTipoRol)
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.IdTipoRol</dd>
+
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Model.NombreTipoRol</dd>
+
+        <dt class="col-sm-2">Permisos Asignados</dt>
+        <dd class="col-sm-10">
+            @if (Model.PermisosTipoRols != null && Model.PermisosTipoRols.Any())
+            {
+                <ul>
+                    @foreach (var permiso in Model.PermisosTipoRols)
+                    {
+                        <li>@permiso.IdPermisoPtrNavigation.NombrePermiso</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No hay permisos asignados.</p>
+            }
         </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdTipoRol">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdTipoRol" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>
