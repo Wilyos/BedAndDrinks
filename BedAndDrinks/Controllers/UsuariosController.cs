@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BedAndDrinks.Models;
 using FluentValidation;
+using AspNetCoreGeneratedDocument;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace BedAndDrinks.Controllers
 {
@@ -65,7 +67,7 @@ namespace BedAndDrinks.Controllers
             {
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","Home");
             }
             ViewData["IdReservaU"] = new SelectList(_context.Reservas, "IdReserva", "IdReserva", usuario.IdReservaU); // Crea una lista desplegable de reservas
             ViewData["IdRolUsuario"] = new SelectList(_context.Rols, "IdRol", "IdRol", usuario.IdRolUsuario); // Crea una lista desplegable de roles

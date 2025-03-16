@@ -45,9 +45,9 @@ namespace BedAndDrinks.Models
                 .NotEmpty().WithMessage("La reserva es requerida")
                 .Must(x => _context.Reservas.Any(y => y.IdReserva == x)).WithMessage("La reserva no existe"); */
 
-            RuleFor(x => x.EstadoUsuario)
+            /*RuleFor(x => x.EstadoUsuario)
                 .NotEmpty().WithMessage("El estado usuario es requerido")
-                .Must(x => x == "Activo" || x == "Inactivo").WithMessage("El estado usuario debe ser Activo o Inactivo");
+                .Must(x => x == "Activo" || x == "Inactivo").WithMessage("El estado usuario debe ser Activo o Inactivo"); */
 
             RuleFor(x => x.Observacion)
                 .MaximumLength(200).WithMessage("La observación no puede tener más de 200 caracteres");
