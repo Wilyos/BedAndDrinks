@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BedAndDrinks.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BedAndDrinks.Controllers
 {
+    [AuthorizeByRoleId(2)]
     public class PermisosController : Controller
     {
         private readonly BedAndDrinkContext _context;
@@ -19,6 +21,7 @@ namespace BedAndDrinks.Controllers
         }
 
         // GET: Permisos
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Permisos.ToListAsync());
