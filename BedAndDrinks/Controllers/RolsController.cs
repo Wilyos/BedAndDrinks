@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BedAndDrinks.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BedAndDrinks.Controllers
 {
+    
     public class RolsController : Controller
     {
         private readonly BedAndDrinkContext _context;
@@ -99,7 +101,7 @@ namespace BedAndDrinks.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdRol,NombreRol,IdTipoRolR,FechaCreacion")] Rol rol)
+        public async Task<IActionResult> Edit(int id, [Bind("IdRol,NombreRol,IdTipoRolR,FechaCreacion,Estado")] Rol rol)
         {
             if (id != rol.IdRol)
             {

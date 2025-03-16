@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +19,23 @@ builder.Services.AddControllersWithViews(); // Agregar servicios MVC al contened
 builder.Services.AddFluentValidationAutoValidation(); // Agregar validación automática de FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>(); // Registra automáticamente todos los validadores en el ensamblado que contiene UsuarioValidator
 
+// Habilitar autenticación con cookies
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login"; // Redireccionar si no está autenticado
+        options.LogoutPath = "/Account/Logout"; // Ruta para cerrar sesión
+        options.AccessDeniedPath = "/Account/AccessDenied"; // Acceso denegado
+    });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -28,6 +47,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

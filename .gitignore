@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /BedAndDrinks/appsettings.json
 /BedAndDrinks/Models/BedAndDrinkContext.cs
+/BedAndDrinks/Models/BedAndDrinkContext.cs
+/BedAndDrinks/appsettings.json
