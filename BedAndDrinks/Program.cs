@@ -16,15 +16,20 @@ builder.Services.AddDbContext<BedAndDrinkContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
 
 builder.Services.AddControllersWithViews(); // Agregar servicios MVC al contenedor de servicios
-builder.Services.AddFluentValidationAutoValidation(); // Agregar validaciÛn autom·tica de FluentValidation
-builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>(); // Registra autom·ticamente todos los validadores en el ensamblado que contiene UsuarioValidator
+builder.Services.AddFluentValidationAutoValidation(); // Agregar validaci√≥n autom√°tica de FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>(); // Registra autom√°ticamente todos los validadores en el ensamblado que contiene UsuarioValidator
 
-// Habilitar autenticaciÛn con cookies
+// Habilitar autenticaci√≥n con cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Redireccionar si no est· autenticado
-        options.LogoutPath = "/Account/Logout"; // Ruta para cerrar sesiÛn
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(10); // Expira en 30 minutos
+        options.SlidingExpiration = true; // Renueva el tiempo si hay actividad
+        options.Cookie.HttpOnly = true; // Protecci√≥n contra ataques XSS
+        options.Cookie.Expiration = null; // La cookie expira al cerrar el navegador
+        options.Cookie.IsEssential = true;
+        options.LoginPath = "/Account/Login"; // Redireccionar si no est√° autenticado
+        options.LogoutPath = "/Account/Logout"; // Ruta para cerrar sesi√≥n
         options.AccessDeniedPath = "/Account/AccessDenied"; // Acceso denegado
     });
 

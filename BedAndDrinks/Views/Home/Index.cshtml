@@ -2,32 +2,70 @@
     ViewData["Title"] = "Home Page";
 }
 
+<header>
+    <p>Bienvenido a Bed&Drinks</p>
+</header>
+
+
+<main>
+    <form asp-action="Buscar" method="post">
+   
+        <label for="CheckIn">Check-in</label>
+        <input type="date" id="CheckIn" name="CheckIn" required />
+
+        <label for="CheckOut">Check-out</label>
+        <input type="date" id="CheckOut" name="CheckOut" required />
+
+        <label for="Adultos">Adultos</label>
+        <input type="number" id="Adultos" name="Adultos" value="2" required />
+
+        <label for="Ninos">Niños</label>
+        <input type="number" id="Ninos" name="Ninos" value="0" required />
+
+        <label for="Habitaciones">Habitaciones</label>
+        <input type="number" id="Habitaciones" name="Habitaciones" value="1" required />
+
+        <button type="submit">Buscar</button>
+    </form>
+</main>
+
 <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #007bff;
+        color: white;
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }   
+  
+        header, p
+        {
+            margin: 20px;
+            font-size: 1.2em;
+        }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin: 20px 0;
+        font-size: 2.5em;
+    }
 
 </style>
 <h1>Bed&Drinks</h1>
-<form asp-action="Buscar" method="post">
-    
-    <label for="CheckIn">Check-in</label>
-    <input type="date" id="CheckIn" name="CheckIn" required />
 
-    <label for="CheckOut">Check-out</label>
-    <input type="date" id="CheckOut" name="CheckOut" required />
-
-    <label for="Adultos">Adultos</label>
-    <input type="number" id="Adultos" name="Adultos" value="2" required />
-
-    <label for="Ninos">Niños</label>
-    <input type="number" id="Ninos" name="Ninos" value="0" required />
-
-    <label for="Habitaciones">Habitaciones</label>
-    <input type="number" id="Habitaciones" name="Habitaciones" value="1" required />
-
-    <button type="submit">Buscar</button>
-</form>
-
-<p>Viajo por trabajo</p>
-
-<p>Reserva y ahorra un 7% en Rentalcars.com en forma de vales <a href="#">Ver detalles de la promoción</a></p>
-
-<h2>Ofertas</h2>
