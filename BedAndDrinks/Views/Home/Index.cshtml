@@ -9,9 +9,7 @@
 
 <main>
     <form asp-action="Buscar" method="post">
-        <label for="Destino">¿Adónde vas?</label>
-        <input type="text" id="Destino" name="Destino" required />
-
+   
         <label for="CheckIn">Check-in</label>
         <input type="date" id="CheckIn" name="CheckIn" required />
 
@@ -53,8 +51,10 @@
         position: sticky;
         top: 0;
         z-index: 1000;
+    }   
   
-        header p {
+        header, p
+        {
             margin: 20px;
             font-size: 1.2em;
         }
@@ -68,73 +68,4 @@
 
 </style>
 <h1>Bed&Drinks</h1>
-<form asp-action="Buscar" method="post">
-    
-    <label for="CheckIn">Check-in</label>
-    <input type="date" id="CheckIn" name="CheckIn" required />
 
-
-    main {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: 20px;
-    }
-
-    form {
-        background: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        width: 100%;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #555;
-    }
-
-    input[type="text"],
-    input[type="date"],
-    input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 16px;
-    }
-
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        input[type="number"]:focus {
-            border-color: #666;
-            outline: none;
-        }
-
-    button {
-        background-color: #007bff;
-        color: white;
-        padding: 12px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 18px;
-        transition: background-color 0.3s;
-    }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        button:active {
-            background-color: #004080;
-        }
-</style>

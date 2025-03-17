@@ -51,8 +51,9 @@ namespace BedAndDrinks.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             var authProperties = new AuthenticationProperties
+            
             {
-                IsPersistent = true
+                IsPersistent = false
             };
 
             // Iniciar sesión
@@ -62,9 +63,16 @@ namespace BedAndDrinks.Controllers
         }
 
         // Cerrar sesión
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+            // Cierra la sesión del usuario
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Elimina la cookie de autenticación
+            Response.Cookies.Delete(".AspNetCore.Cookies");
+
             return RedirectToAction("Login", "Account");
         }
 

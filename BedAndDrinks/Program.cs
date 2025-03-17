@@ -23,6 +23,11 @@ builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>(); // Reg
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(10); // Expira en 30 minutos
+        options.SlidingExpiration = true; // Renueva el tiempo si hay actividad
+        options.Cookie.HttpOnly = true; // Protección contra ataques XSS
+        options.Cookie.Expiration = null; // La cookie expira al cerrar el navegador
+        options.Cookie.IsEssential = true;
         options.LoginPath = "/Account/Login"; // Redireccionar si no está autenticado
         options.LogoutPath = "/Account/Logout"; // Ruta para cerrar sesión
         options.AccessDeniedPath = "/Account/AccessDenied"; // Acceso denegado
