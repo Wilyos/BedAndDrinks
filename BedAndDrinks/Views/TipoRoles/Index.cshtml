@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Index";
+    var roleIdClaim = User.FindFirst("RolId")?.Value;
+    int roleId = roleIdClaim != null ? int.Parse(roleIdClaim) : 0;
 }
 
 <style>
@@ -110,6 +112,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+@if(roleId == 2)
+{
 <table class="table">
     <thead>
         <tr>
@@ -134,3 +138,4 @@
 }
     </tbody>
 </table>
+}
