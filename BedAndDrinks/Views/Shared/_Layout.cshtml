@@ -27,25 +27,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (roleId == 2)
+                        @if (roleId == 2 || roleId==1)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Permisos" asp-action="Index">Permisos</a>
                             </li>
                         }
-                        @if (roleId == 2)
+                        @if (roleId == 2 || roleId == 1)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="TipoRoles" asp-action="Index">Tipo De Rol</a>
                             </li>
                         }
-                        @if (roleId == 2)
+                        @if (roleId == 2 || roleId == 1)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Rols" asp-action="Index">Rol</a>
                             </li>
                         }
-                        @if (roleId == 2)
+                        @if (roleId == 2 || roleId == 1)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
