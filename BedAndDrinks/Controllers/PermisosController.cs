@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BedAndDrinks.Controllers
 {
-    [AuthorizeByRoleId(2)]
+    //[AuthorizeByRoleId(2)]
     public class PermisosController : Controller
     {
         private readonly BedAndDrinkContext _context;
