@@ -36,17 +36,17 @@ namespace BedAndDrinks.Controllers
 
             if (usuario == null)
             {
-                ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
+                ModelState.AddModelError("Contrasena", "Usuario o contraseña incorrectos.");
                 return View(model);
             }
 
             // Crear Claims con el ID del Rol
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, usuario.NombreUsuario),
-            new Claim(ClaimTypes.NameIdentifier, usuario.IdUsuario.ToString()),
-            new Claim("RolId", usuario.IdRolUsuario.ToString()) // Guardar ID del Rol
-        };
+            {
+                new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+                new Claim(ClaimTypes.NameIdentifier, usuario.IdUsuario.ToString()),
+                new Claim("RolId", usuario.IdRolUsuario.ToString()) // Guardar ID del Rol
+            };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
