@@ -1,39 +1,149 @@
 ﻿@model BedAndDrinks.Models.Permiso
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Permiso";
 }
 
-<h1>Edit</h1>
+<style>
+    /* Ajustes generales */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        padding-top: 80px;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
 
-<h4>Permiso</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdPermiso" />
-            <div class="form-group">
-                <label asp-for="NombrePermiso" class="control-label"></label>
-                <input asp-for="NombrePermiso" class="form-control" />
-                <span asp-validation-for="NombrePermiso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    main {
+        flex: 1;
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    h1 {
+        color: #4CAF50;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        color: #333;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    hr {
+        margin: 20px 0;
+        border: 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .text-danger {
+        font-size: 14px;
+    }
+
+    /* Botones */
+    .btn-primary {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+    .back-link {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        text-decoration: none;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        margin-top: auto;
+    }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<main>
+    <h1>Editar Permiso</h1>
+    <h4>Modifica la información</h4>
+    <hr />
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdPermiso" />
+
+        <div class="form-group">
+            <label asp-for="NombrePermiso" class="control-label"></label>
+            <input asp-for="NombrePermiso" class="form-control" />
+            <span asp-validation-for="NombrePermiso" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Descripcion" class="control-label"></label>
+            <input asp-for="Descripcion" class="form-control" />
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Guardar Cambios" class="btn-primary" />
+        </div>
+    </form>
+
+    <a asp-action="Index" class="back-link">Volver a la lista</a>
+</main>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

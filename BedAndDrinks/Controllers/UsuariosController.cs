@@ -9,9 +9,11 @@ using BedAndDrinks.Models;
 using FluentValidation;
 using AspNetCoreGeneratedDocument;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BedAndDrinks.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly BedAndDrinkContext _context;
