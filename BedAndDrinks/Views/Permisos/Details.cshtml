@@ -1,30 +1,121 @@
 ﻿@model BedAndDrinks.Models.Permiso
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Permiso";
 }
 
-<h1>Details</h1>
+<style>
+    /* Ajustes generales */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        padding-top: 80px;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
 
-<div>
-    <h4>Permiso</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombrePermiso)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombrePermiso)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdPermiso">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    main {
+        flex: 1;
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h1 {
+        color: #4CAF50;
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        color: #333;
+        font-weight: bold;
+    }
+
+    dl {
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    hr {
+        margin: 20px 0;
+        border: 0;
+        border-top: 1px solid #ddd;
+    }
+
+    /* Botones */
+    .btn-primary {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        margin-top: auto;
+    }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<main>
+    <h1>Detalles del Permiso</h1>
+
+    <div>
+        <h4>Información del Permiso</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">Nombre:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.NombrePermiso)</dd>
+
+            <dt class="col-sm-4">Descripción:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Descripcion)</dd>
+        </dl>
+    </div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.IdPermiso" class="btn-primary">Editar</a>
+        <a asp-action="Index" class="back-link">Volver a la lista</a>
+    </div>
+</main>

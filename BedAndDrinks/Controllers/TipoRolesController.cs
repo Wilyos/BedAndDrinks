@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BedAndDrinks.Controllers
 {
+    [Authorize]
     public class TipoRolesController : Controller
     {
         private readonly BedAndDrinkContext _context;

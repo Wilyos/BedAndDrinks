@@ -2,33 +2,50 @@
     ViewData["Title"] = "Home Page";
 }
 
-<header>
-    <p>Bienvenido a Bed&Drinks</p>
+<!-- Encabezado -->
+<header class="bg-primary text-white text-center py-3 shadow">
+    <h1 class="m-0">Bed&Drinks</h1>
 </header>
 
+<!-- Contenido principal -->
+<main class="container d-flex flex-column align-items-center justify-content-center mt-4">
 
-<main>
-    <form asp-action="Buscar" method="post">
-   
-        <label for="CheckIn">Check-in</label>
-        <input type="date" id="CheckIn" name="CheckIn" required />
+    <h2 class="mb-4 text-center">Encuentra tu hospedaje ideal</h2>
 
-        <label for="CheckOut">Check-out</label>
-        <input type="date" id="CheckOut" name="CheckOut" required />
+    <!-- Formulario dentro de un Card -->
+    <div class="card p-4 shadow-lg" style="max-width: 600px; width: 100%;">
+        <form asp-action="Buscar" method="post">
+            <div class="mb-3">
+                <label for="CheckIn" class="form-label">Check-in</label>
+                <input type="date" id="CheckIn" name="CheckIn" class="form-control" required />
+            </div>
 
-        <label for="Adultos">Adultos</label>
-        <input type="number" id="Adultos" name="Adultos" value="2" required />
+            <div class="mb-3">
+                <label for="CheckOut" class="form-label">Check-out</label>
+                <input type="date" id="CheckOut" name="CheckOut" class="form-control" required />
+            </div>
 
-        <label for="Ninos">Niños</label>
-        <input type="number" id="Ninos" name="Ninos" value="0" required />
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="Adultos" class="form-label">Adultos</label>
+                    <input type="number" id="Adultos" name="Adultos" class="form-control" value="2" required />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="Ninos" class="form-label">Niños</label>
+                    <input type="number" id="Ninos" name="Ninos" class="form-control" value="0" required />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="Habitaciones" class="form-label">Habitaciones</label>
+                    <input type="number" id="Habitaciones" name="Habitaciones" class="form-control" value="1" required />
+                </div>
+            </div>
 
-        <label for="Habitaciones">Habitaciones</label>
-        <input type="number" id="Habitaciones" name="Habitaciones" value="1" required />
-
-        <button type="submit">Buscar</button>
-    </form>
+            <button type="submit" class="btn btn-primary btn-lg w-100">Buscar</button>
+        </form>
+    </div>
 </main>
 
+<!-- Estilos adicionales -->
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -39,33 +56,12 @@
         flex-direction: column;
         align-items: center;
         min-height: 100vh;
+        padding-top: 80px;
     }
 
-    header {
-        background-color: #007bff;
-        color: white;
-        width: 100%;
-        padding: 10px 0;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }   
-  
-        header, p
-        {
-            margin: 20px;
-            font-size: 1.2em;
-        }
-
-    h1 {
-        text-align: center;
-        color: #333;
-        margin: 20px 0;
-        font-size: 2.5em;
+    .card {
+        border-radius: 10px;
+        background: white;
     }
-
 </style>
-<h1>Bed&Drinks</h1>
 
