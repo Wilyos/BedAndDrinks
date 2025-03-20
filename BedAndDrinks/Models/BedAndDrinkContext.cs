@@ -65,6 +65,8 @@ public partial class BedAndDrinkContext : DbContext
 
             entity.ToTable("Habitacion");
 
+            entity.Property(e => e.Estado).HasColumnName("estado");
+
             entity.Property(e => e.IdHabitacion)
                 .ValueGeneratedNever()
                 .HasColumnName("idHabitacion");
