@@ -6,6 +6,7 @@ namespace BedAndDrinks.Models;
 public partial class Habitacion
 {
     public int IdHabitacion { get; set; }
+    public bool Estado { get; set; } = true;
 
     public virtual ICollection<ReservaHabitacion> ReservaHabitacions { get; set; } = new List<ReservaHabitacion>();
 
