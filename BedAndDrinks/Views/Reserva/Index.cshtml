@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BedAndDrinks.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Lista de Reservas";
+}
+
+<h2>Reservas</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear Nueva Reserva</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reserva in Model)
+        {
+            <tr>
+                <td>@reserva.IdReserva</td>
+                <td>@reserva.Fecha?.ToString("yyyy-MM-dd")</td>
+                <td>@reserva.Estado</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@reserva.IdReserva" class="btn btn-info">Detalles</a>
+                    <a asp-action="Edit" asp-route-id="@reserva.IdReserva" class="btn btn-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@reserva.IdReserva" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

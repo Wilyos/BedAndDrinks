@@ -1,0 +1,28 @@
+﻿@model BedAndDrinks.Models.Reserva
+
+@{
+    ViewData["Title"] = "Editar Reserva";
+}
+
+<h2>Editar Reserva</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="IdReserva" />
+
+    <div class="form-group">
+        <label asp-for="Fecha">Fecha</label>
+        <input asp-for="Fecha" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Estado">Estado</label>
+        <input asp-for="Estado" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ObservacionesReserva">Observaciones</label>
+        <textarea asp-for="ObservacionesReserva" class="form-control"></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+

@@ -31,8 +31,9 @@ namespace BedAndDrinks.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Buscar usuario en la base de datos
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.CorreoUsuario == model.CorreoUsuario && u.Contrasena == model.Contrasena);
+            var usuario = _context.Usuarios
+                .Include(u => u.IdRolUsuarioNavigation) // Cargar el Rol
+                .FirstOrDefault(u => u.CorreoUsuario == model.CorreoUsuario && u.Contrasena == model.Contrasena);
 
             if (usuario == null)
             {
@@ -40,46 +41,32 @@ namespace BedAndDrinks.Controllers
                 return View(model);
             }
 
-            // Crear Claims con el ID del Rol
+            // Obtener los permisos del usuario desde la relación de su rol
+            var permisos = _context.PermisosTipoRols
+                .Where(ptr => ptr.IdTipoRolPtr == usuario.IdRolUsuario)
+                .Select(ptr => ptr.IdPermisoPtrNavigation.NombrePermiso) // Traer solo los nombres de los permisos
+                .ToList();
+
+            // Crear Claims
             var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+        new Claim(ClaimTypes.NameIdentifier, usuario.IdUsuario.ToString())
+    };
+
+            // Agregar los permisos como Claims
+            foreach (var permiso in permisos)
             {
-                new Claim(ClaimTypes.Name, usuario.NombreUsuario),
-                new Claim(ClaimTypes.NameIdentifier, usuario.IdUsuario.ToString()),
-                new Claim("RolId", usuario.IdRolUsuario.ToString()) // Guardar ID del Rol
-            };
+                claims.Add(new Claim("Permiso", permiso));
+            }
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var authProperties = new AuthenticationProperties
-            
-            {
-                IsPersistent = false
-            };
+            var authProperties = new AuthenticationProperties { IsPersistent = false };
 
             // Iniciar sesión
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
             return RedirectToAction("Index", "Home");
-        }
-
-        // Cerrar sesión
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            // Cierra la sesión del usuario
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            // Elimina la cookie de autenticación
-            Response.Cookies.Delete(".AspNetCore.Cookies");
-
-            return RedirectToAction("Login", "Account");
-        }
-
-        // Página de acceso denegado
-        public IActionResult AccessDenied()
-        {
-            return View();
         }
     }
     
