@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BedAndDrinks.Controllers
 {
-    [Authorize]
+   [Authorize]
     public class UsuariosController : Controller
     {
         private readonly BedAndDrinkContext _context;
