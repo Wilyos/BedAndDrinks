@@ -21,9 +21,9 @@ public partial class Reserva
 
     public virtual ICollection<Registro> Registros { get; set; } = new List<Registro>();
 
-    public virtual ICollection<ReservaDeServicio> ReservaDeServicios { get; set; } = new List<ReservaDeServicio>();
+    public virtual ICollection<ReservaDeServicio> ReservaDeServicios { get; set; } = [];
 
-    public virtual ICollection<ReservaHabitacion> ReservaHabitacions { get; set; } = new List<ReservaHabitacion>();
+    public virtual ICollection<ReservaHabitacion> ReservaHabitacions { get; set; } = [];
 
     public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }
