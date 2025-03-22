@@ -1,0 +1,17 @@
+﻿@model BedAndDrinks.Models.Reserva
+
+@{
+    ViewData["Title"] = "Detalles de la Reserva";
+}
+
+<h2>Detalles de la Reserva</h2>
+
+<div>
+    <p><strong>ID:</strong> @Model.IdReserva</p>
+    <p><strong>Fecha:</strong> @Model.Fecha?.ToString("yyyy-MM-dd")</p>
+    <p><strong>Estado:</strong> @Model.Estado</p>
+    <p><strong>Observaciones:</strong> @Model.ObservacionesReserva</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>
+

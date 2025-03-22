@@ -19,7 +19,7 @@ public partial class Servicio
 
     public string? Estado { get; set; }
 
-    public virtual ICollection<PaqueteServicio> PaqueteServicios { get; set; } = new List<PaqueteServicio>();
+    public virtual ICollection<PaqueteServicio> PaqueteServicios { get; set; } = [];
 
-    public virtual ICollection<ReservaDss> ReservaDsses { get; set; } = new List<ReservaDss>();
+    public virtual ICollection<ReservaDss> ReservaDsses { get; set; } = [];
 }

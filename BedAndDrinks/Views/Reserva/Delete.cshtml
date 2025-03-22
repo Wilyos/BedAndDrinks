@@ -1,0 +1,18 @@
+﻿@model BedAndDrinks.Models.Reserva
+
+@{
+    ViewData["Title"] = "Eliminar Reserva";
+}
+
+<h2>¿Estás seguro de que deseas eliminar esta reserva?</h2>
+
+<div>
+    <p><strong>ID:</strong> @Model.IdReserva</p>
+    <p><strong>Fecha:</strong> @Model.Fecha?.ToString("yyyy-MM-dd")</p>
+    <p><strong>Estado:</strong> @Model.Estado</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
