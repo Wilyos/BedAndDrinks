@@ -1,0 +1,44 @@
+﻿@model BedAndDrinks.Models.Habitacion
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear Habitación</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <input asp-for="Estado" class="form-control" />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdHabitacionTh" class="control-label">Tipo de Habitación</label>
+                <select asp-for="IdHabitacionTh" class="form-control" asp-items="ViewBag.IdHabitacionTh">
+                    <option value="">-- Seleccione un Tipo de Habitación --</option>
+                </select>
+                <span asp-validation-for="IdHabitacionTh" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

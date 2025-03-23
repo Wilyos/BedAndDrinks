@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BedAndDrinks.Models.Habitacion>
+
+@{
+    ViewData["Habitacion"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdHabitacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservaHabitacions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoHabitacions)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdHabitacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservaHabitacions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoHabitacions)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdHabitacion">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdHabitacion">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdHabitacion">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
